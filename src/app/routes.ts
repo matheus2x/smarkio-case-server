@@ -8,5 +8,6 @@ routes.get("/", (req, res) => {
 });
 
 routes.post("/tts", commentsController.store);
+routes.get("/tts", commentsController.index);
 
 export default routes;

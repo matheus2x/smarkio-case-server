@@ -1,7 +1,7 @@
 import { createWriteStream } from "fs";
 import { resolve } from "path";
 import { Request, Response } from "express";
-import { mysql, tts } from "../../config";
+import { mysql, tts, env } from "../../config";
 
 const commentsController = {
   async store(req: Request, res: Response) {
@@ -46,6 +46,29 @@ const commentsController = {
     } catch (err) {
       console.error(
         "[Server Error]: Error while inserting new comment:\n",
+        err.message
+      );
+
+      return res.status(500).json({ Error: "Internal Server Error" });
+    }
+  },
+
+  async index(req: Request, res: Response) {
+    try {
+      const comments = await mysql.connection("comments").select("*");
+
+      const serializedComments = comments.map((comment) => {
+        return {
+          id: comment.id,
+          comment: comment.comment,
+          audio: `http://localhost:${env.nodePort}/uploads/${comment.audio}`,
+        };
+      });
+
+      return res.json(serializedComments);
+    } catch (err) {
+      console.error(
+        "Server Error]: Error while searching comments:\n",
         err.message
       );
 
