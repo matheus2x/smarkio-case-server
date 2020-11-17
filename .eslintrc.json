@@ -19,6 +19,7 @@
     "import/prefer-default-export": "off",
     "no-console": "off",
     "no-unused-vars": "warn",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "import/first": "off"
   }
 }
