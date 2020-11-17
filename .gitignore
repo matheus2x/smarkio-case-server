@@ -7,8 +7,6 @@ node_modules
 .env
 
 # logs
-yarn-debug.log*
-yarn-error.log*
 .eslintcache
 
 # internal
