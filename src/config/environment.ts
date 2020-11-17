@@ -17,3 +17,7 @@ export const mysqlHost = process.env.MYSQL_HOST;
 export const mysqlUser = process.env.MYSQL_USER;
 export const mysqlPass = process.env.MYSQL_PASS;
 export const mysqlDB = process.env.MYSQL_DB;
+
+//  IBM Watson Cloud env
+export const ttsApiKey = process.env.TTS_API_KEY || "";
+export const ttsUrl = process.env.TTS_URL;
