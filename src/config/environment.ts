@@ -9,6 +9,11 @@ if (!envFound) {
   throw new Error('[Server Error]: Environment File ".env" Not Found.');
 }
 
-export default {
-  nodePort: process.env.NODE_PORT || 3333,
-};
+//  Node env
+export const nodePort = process.env.NODE_PORT || 3333;
+
+//  MySQL env
+export const mysqlHost = process.env.MYSQL_HOST;
+export const mysqlUser = process.env.MYSQL_USER;
+export const mysqlPass = process.env.MYSQL_PASS;
+export const mysqlDB = process.env.MYSQL_DB;

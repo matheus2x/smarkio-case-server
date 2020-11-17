@@ -6,7 +6,8 @@
     "dev": "tsnd --respawn ./src/index.ts",
     "build": "tsc",
     "start": "node ./dist/index.js",
-    "start:watch": "nodemon ./dist/index.js"
+    "start:watch": "nodemon ./dist/index.js",
+    "knex:migrate": "knex --knexfile ./src/config/knexfile.ts migrate:latest"
   },
   "keywords": [],
   "author": "",
