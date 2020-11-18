@@ -80,7 +80,106 @@ CREATE DATABASE someDatabase;
 
 ## :orange_book: API Usage
 
---add later--
+Attention: Omit the braces <code>{}</code> from examples. They indicate variable values
+
+### Routes
+
+#### 1. Create a new speechable comment:
+
+Method: `POST` <br>
+Route: `http://localhost:{NODE_PORT}/tts` <br>
+Request Body: `Message you want to convert to speech` <br>
+Output w/ Datatype:
+
+```javascript
+  {
+    "id": Number,
+    "comment": String,
+    "audio": String
+  }
+```
+
+<details>
+  <summary>Example:</summary>
+
+Method: `POST` <br>
+Route: `http://localhost:3333/tts` <br>
+Request Body: `Die Monster! You Don't Belong on this World!` <br>
+Output:
+
+```javascript
+  {
+    "id": 1,
+    "comment": "Die Monster! You Don't Belong on this World!",
+    "audio": "speech-1.mp3"
+  }
+```
+
+MySQL Table:
+
+<h1 align="left">
+    <img alt="sql" title="#sql" src=".github/sql-example.png"><br>
+</h1>
+</details> <br>
+
+#### 2. Listen to the comment speech:
+Method: `GET` <br>
+Route: `http://localhost:{NODE_PORT}/uploads/speech-{commentID}.mp3` <br>
+Output: `audio.mp3 bynary file` <br>
+
+<details>
+  <summary>Example:</summary>
+
+Method: `GET` <br>
+Route: `http://localhost:3333/uploads/speech-1.mp3` <br>
+Output: [speech-1.mp3](https://github.com/matheus2x/smarkio-case-server/blob/master/uploads/speech-1.mp3) <br>
+Listen audio in Vocaroo: https://voca.ro/1kSLOdtoUecV
+</details> <br>
+
+#### 3. Index all comments in DB:
+
+Method: `GET` <br>
+Route: `http://localhost:{NODE_PORT}/tts` <br>
+Output w/ Datatype:
+
+```javascript
+  [
+    {
+      "id": Number,
+      "comment": String,
+      "audio": String
+    },
+    {
+      "id": Number,
+      "comment": String,
+      "audio": String
+     }
+     ...
+  ]
+```
+
+<details>
+  <summary>Example:</summary>
+
+Method: `GET` <br>
+Route: `http://localhost:3333/tts` <br>
+Output:
+
+```javascript
+  [
+    {
+      "id": 1,
+      "comment": "Die Monster! You Don't Belong on this World!",
+      "audio": "http://localhost:3333/uploads/speech-1.mp3"
+    },
+     ...
+  ]
+```
+
+Listen audio in Vocaroo: https://voca.ro/1kSLOdtoUecV
+
+</details> <br>
+
 
 <a id="useful-urls"></a>
 
