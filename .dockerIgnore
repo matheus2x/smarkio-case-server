@@ -1,0 +1,17 @@
+# dependencies
+node_modules
+
+# docker
+.dockerignore
+docker-compose.yml
+Dockerfile
+
+# git
+.gitignore
+.gitattributes
+.github
+
+# misc
+.vscode
+README.md
+LICENSE
