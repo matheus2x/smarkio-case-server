@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node ./dist/index.js",
     "start:watch": "nodemon ./dist/index.js",
-    "knex:migrate": "knex --knexfile ./src/config/knexfile.ts migrate:latest"
+    "knex:migrate": "knex --knexfile ./src/config/knexfile.ts migrate:latest",
+    "populate": "bash ./scripts/POPULATE.sh"
   },
   "keywords": [],
   "author": "",
