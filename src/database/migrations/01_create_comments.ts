@@ -5,7 +5,8 @@ export async function up(knex: Knex) {
     table.increments("id").primary();
 
     table.string("comment", 4000).notNullable();
-    table.string("audio").notNullable().unique();
+    table.string("speech").notNullable();
+    table.string("speechLang").notNullable();
   });
 }
 

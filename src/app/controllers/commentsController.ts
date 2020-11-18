@@ -6,20 +6,30 @@ import { mysql, tts, env } from "../../config";
 const commentsController = {
   async store(req: Request, res: Response) {
     try {
-      const { comment } = req.body;
+      console.log(req.body);
+      const { comment, voiceLang } = req.body;
+
+      if (voiceLang !== "1" && voiceLang !== "2") {
+        return res.status(400).json({ Error: "Invalid Voice." });
+      }
 
       if (comment.length <= 0 || comment.length > 4000) {
         return res.status(400).json({ Error: "Invalid Comment." });
       }
 
+      let voice = "pt-BR_IsabelaV3Voice";
+      if (voiceLang === "2") {
+        voice = "en-US_AllisonV3Voice";
+      }
+
       const [commentId] = await mysql
         .connection("comments")
-        .insert({ comment, audio: ".." });
+        .insert({ comment, speech: "..", speechLang: voice });
 
       const synthesizeParams = {
         text: comment,
         accept: "audio/mp3",
-        voice: "en-US_AllisonV3Voice",
+        voice,
       };
 
       const synthesizeStream = await tts.tts.synthesizeUsingWebSocket(
@@ -36,12 +46,12 @@ const commentsController = {
       await mysql
         .connection("comments")
         .where("id", commentId)
-        .update({ audio: speechFile });
+        .update({ speech: speechFile });
 
       return res.json({
         id: commentId,
         comment,
-        audio: speechFile,
+        speech: speechFile,
       });
     } catch (err) {
       console.error(
