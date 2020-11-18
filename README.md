@@ -18,7 +18,7 @@
 This is the Server Side of my interview application in **Smarkio**.<br>
 Basically, a REST API that consists of converting text to speech using the **IBM Watson Cloud** platform.
 
-**Client-Side** available: [Here](https://github.com/matheus2x/smarkio-case/ "Client-Side")
+**Client-Side** available: [Here](https://github.com/matheus2x/smarkio-case-client/ "Client-Side")
 
 <a id="techs-used"></a>
 
@@ -88,14 +88,14 @@ Attention: Omit the braces <code>{}</code> from examples. They indicate variable
 
 Method: `POST` <br>
 Route: `http://localhost:{NODE_PORT}/tts` <br>
-Request Body: `Message you want to convert to speech` <br>
+Request Body: `Message you want to convert to speech` and the `voiceLang` <br>
 Output w/ Datatype:
 
 ```javascript
   {
     "id": Number,
     "comment": String,
-    "audio": String
+    "speech": String
   }
 ```
 
@@ -107,22 +107,13 @@ Route: `http://localhost:3333/tts` <br>
 Request Body: `Die Monster! You Don't Belong on this World!` <br>
 Output:
 
-```javascript
-  {
-    "id": 1,
-    "comment": "Die Monster! You Don't Belong on this World!",
-    "audio": "speech-1.mp3"
-  }
-```
-
-MySQL Table:
-
 <h1 align="left">
-    <img alt="sql" title="#sql" src=".github/sql-example.png"><br>
+    <img alt="post" title="post" src=".github/post-response-example.png"><br>
 </h1>
 </details> <br>
 
 #### 2. Listen to the comment speech:
+
 Method: `GET` <br>
 Route: `http://localhost:{NODE_PORT}/uploads/speech-{commentID}.mp3` <br>
 Output: `audio.mp3 bynary file` <br>
@@ -134,6 +125,7 @@ Method: `GET` <br>
 Route: `http://localhost:3333/uploads/speech-1.mp3` <br>
 Output: [speech-1.mp3](https://github.com/matheus2x/smarkio-case-server/blob/master/uploads/speech-1.mp3) <br>
 Listen audio in Vocaroo: https://voca.ro/1kSLOdtoUecV
+
 </details> <br>
 
 #### 3. Index all comments in DB:
@@ -170,22 +162,19 @@ Output:
     {
       "id": 1,
       "comment": "Die Monster! You Don't Belong on this World!",
-      "audio": "http://localhost:3333/uploads/speech-1.mp3"
+      "speech": "http://localhost:3333/uploads/speech-5.mp3"
     },
      ...
   ]
 ```
 
-Listen audio in Vocaroo: https://voca.ro/1kSLOdtoUecV
-
 </details> <br>
-
 
 <a id="useful-urls"></a>
 
 ## :link: Useful URLs
 
-- [Client Side](https://github.com/matheus2x/smarkio-case/ "Client Side")
+- [Client Side](https://github.com/matheus2x/smarkio-case-client/ "Client Side")
 
 ---
 
