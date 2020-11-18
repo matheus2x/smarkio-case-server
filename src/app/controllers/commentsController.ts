@@ -71,7 +71,7 @@ const commentsController = {
         return {
           id: comment.id,
           comment: comment.comment,
-          audio: `http://localhost:${env.nodePort}/uploads/${comment.audio}`,
+          audio: `http://localhost:${env.nodePort}/uploads/${comment.speech}`,
         };
       });
 
