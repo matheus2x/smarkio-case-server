@@ -13,8 +13,8 @@ if (!envFound) {
 export const nodePort = process.env.NODE_PORT || 3333;
 
 //  MySQL env
-export const mysqlHost = process.env.MYSQL_HOST;
-export const mysqlUser = process.env.MYSQL_USER;
+export const mysqlHost = process.env.MYSQL_HOST || "localhost";
+export const mysqlUser = process.env.MYSQL_USER || "root";
 export const mysqlPass = process.env.MYSQL_PASS;
 export const mysqlDB = process.env.MYSQL_DB;
 
