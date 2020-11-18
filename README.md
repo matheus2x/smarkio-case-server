@@ -1,3 +1,8 @@
+<h1 align="center">
+    <img alt="Logo" title="#logo" width="200px" src=".github/smarkio-logo.png"><br>
+</h1>
+<hr>
+
 # Summary
 
 - [What is this?](#what-is-this)
