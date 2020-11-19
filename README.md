@@ -44,6 +44,11 @@ Basically, a REST API that consists of converting text to speech using the **IBM
   - Container **Docker** -> [Docker](https://docs.docker.com/get-docker/ "Docker")
   - Container Orchestrator **Docker Compose** -> [Docker Compose](https://docs.docker.com/compose/install/ "Docker Compose")
 
+- ### Others requirements:
+
+  - A **IBM Watson Cloud** Account -> [IBM-Register](https://cloud.ibm.com/ "IBM-Register")
+  - On your **IBM account**, you will need to use the **Text To Speech (TTS)** service.
+
 1. Clone this repo with:
 
 ```sh
@@ -75,6 +80,10 @@ CREATE DATABASE someDatabase;
 3. Run `$ npm run build` to compile ts to js
 4. Run `$ npm run knex:migrate` to run migrations
 5. Run `$ npm run knex:seed` to run seeds
+
+### If you've done Everything so far, you can now Start the [Client-Side](https://github.com/matheus2x/smarkio-case-client).
+
+<br>
 
 <a id="api"></a>
 
@@ -183,6 +192,7 @@ Output:
 - [Yarn](https://yarnpkg.com/ "Yarn")
 - [MySQL](https://www.mysql.com/ "MySQL")
 - [Docker](https://www.docker.com/ "Docker")
+- [IBM-Watson-Cloud](https://cloud.ibm.com/ "IBM-Watson-Cloud")
 
 ---
 
