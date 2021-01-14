@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./build",
+    "lib": [ "ES2019", "DOM" ],
     "module": "CommonJS",
     "target": "ES2019",
     "esModuleInterop": true,
@@ -9,6 +10,6 @@
     "resolveJsonModule": true,
     "strict": true
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }
