@@ -1,15 +1,15 @@
 {
-  "compilerOptions": {
-    "outDir": "./build",
-    "lib": [ "ES2019", "DOM" ],
-    "module": "CommonJS",
-    "target": "ES2019",
-    "esModuleInterop": true,
-    "allowJs": true,
-    "noEmit": false,
-    "resolveJsonModule": true,
-    "strict": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"outDir": "./build",
+		"lib": [ "ES2019", "DOM" ],
+		"module": "CommonJS",
+		"target": "ES2019",
+		"esModuleInterop": true,
+		"allowJs": true,
+		"noEmit": false,
+		"resolveJsonModule": true,
+		"strict": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules"]
 }
