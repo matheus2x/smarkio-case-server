@@ -10,7 +10,7 @@ node_modules
 .eslintcache
 
 # internal
-dist
+build
 coverage
 local
 .vscode
