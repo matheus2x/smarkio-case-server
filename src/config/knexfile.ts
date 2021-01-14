@@ -1,4 +1,5 @@
 import { resolve } from "path";
+
 import { connectionConfig } from "./mysql";
 
 module.exports = {

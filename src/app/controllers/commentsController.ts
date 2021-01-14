@@ -1,12 +1,12 @@
 import { createWriteStream } from "fs";
 import { resolve } from "path";
 import { Request, Response } from "express";
+
 import { mysql, tts, env } from "../../config";
 
 const commentsController = {
 	async store(req: Request, res: Response) {
 		try {
-			console.log(req.body);
 			const { comment, voiceLang } = req.body;
 
 			if (voiceLang !== "1" && voiceLang !== "2") {
@@ -54,11 +54,6 @@ const commentsController = {
 				speech: speechFile,
 			});
 		} catch (err) {
-			console.error(
-				"[Server Error]: Error while inserting new comment:\n",
-				err.message
-			);
-
 			return res.status(500).json({ Error: "Internal Server Error" });
 		}
 	},
@@ -77,11 +72,6 @@ const commentsController = {
 
 			return res.json(serializedComments);
 		} catch (err) {
-			console.error(
-				"Server Error]: Error while searching comments:\n",
-				err.message
-			);
-
 			return res.status(500).json({ Error: "Internal Server Error" });
 		}
 	},
