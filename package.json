@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "tsnd --respawn ./src/index.ts",
     "build": "tsc",
-    "start": "node ./dist/index.js",
-    "start:watch": "nodemon ./dist/index.js",
+    "start": "node build/index.js",
+    "start:watch": "nodemon ./build/index.js",
     "knex:migrate": "knex --knexfile ./src/config/knexfile.ts migrate:latest",
     "populate": "bash ./scripts/POPULATE.sh"
   },
@@ -17,7 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "ibm-watson": "^5.7.1",
+    "ibm-watson": "^6.0.2",
     "knex": "^0.21.12",
     "mysql2": "^2.2.5"
   },
