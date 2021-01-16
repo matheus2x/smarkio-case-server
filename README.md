@@ -62,11 +62,11 @@ Basically, a REST API that consists of converting text to speech using the **IBM
 
 - ### **With** Docker:
 
-1. In your `.env` file, add credentials for your [IBM-Cloud](https://cloud.ibm.com/ "IBM-Cloud") Account:
+1. In your `.env` file, add credentials for your [IBM-Cloud](https://cloud.ibm.com/ "IBM-Cloud") Account (don't change the others environment vars):
 
    ```js
-   	TTS_API_KEY=
-   	TTS_URL=
+   	TTS_API_KEY= // REQUIRED
+   	TTS_URL= // REQUIRED
    ```
 
 2. Run `$ docker-compose up --build -d` to build docker-compose
@@ -163,7 +163,7 @@ Response:
 			"id": Number,
 			"comment": String,
 			"audio": String
-			},
+		},
 		...
   ]
 ```
