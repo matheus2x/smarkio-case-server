@@ -13,7 +13,7 @@ const commentsController = {
 				return res.status(400).json({ Error: "Invalid Voice." });
 			}
 
-			if (comment.length <= 0 || comment.length > 4000) {
+			if (comment.length <= 0 || comment.length > 300) {
 				return res.status(400).json({ Error: "Invalid Comment." });
 			}
 
@@ -24,7 +24,7 @@ const commentsController = {
 
 			const [commentId] = await mysql
 				.connection("comments")
-				.insert({ comment, speech: "..", speechLang: voice });
+				.insert({ comment, audio: "..", lang: voice });
 
 			const synthesizeParams = {
 				text: comment,
@@ -32,26 +32,33 @@ const commentsController = {
 				voice,
 			};
 
-			const synthesizeStream = await tts.tts.synthesizeUsingWebSocket(
+			const synthesizeStream = tts.tts.synthesizeUsingWebSocket(
 				synthesizeParams
 			);
 
 			const speechFilePath = resolve(__dirname, "..", "..", "..", "uploads");
 			const speechFile = `speech-${commentId}.mp3`;
 
-			await synthesizeStream.pipe(
-				createWriteStream(`${speechFilePath}/${speechFile}`)
-			);
+			const endStream = new Promise<void>((resolves) => {
+				synthesizeStream.pipe(
+					createWriteStream(`${speechFilePath}/${speechFile}`).on(
+						"finish",
+						resolves
+					)
+				);
+			});
+
+			await endStream;
 
 			await mysql
 				.connection("comments")
 				.where("id", commentId)
-				.update({ speech: speechFile });
+				.update({ audio: speechFile });
 
 			return res.json({
 				id: commentId,
 				comment,
-				speech: speechFile,
+				audio: `http://localhost:${env.nodePort}/uploads/${speechFile}`,
 			});
 		} catch (err) {
 			return res.status(500).json({ Error: "Internal Server Error" });
@@ -62,13 +69,11 @@ const commentsController = {
 		try {
 			const comments = await mysql.connection("comments").select("*");
 
-			const serializedComments = comments.map((comment) => {
-				return {
-					id: comment.id,
-					comment: comment.comment,
-					audio: `http://localhost:${env.nodePort}/uploads/${comment.speech}`,
-				};
-			});
+			const serializedComments = comments.map((comment) => ({
+				id: comment.id,
+				comment: comment.comment,
+				audio: `http://localhost:${env.nodePort}/uploads/${comment.audio}`,
+			}));
 
 			return res.json(serializedComments);
 		} catch (err) {
