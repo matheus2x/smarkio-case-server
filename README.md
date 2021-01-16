@@ -65,8 +65,8 @@ Basically, a REST API that consists of converting text to speech using the **IBM
 1. In your `.env` file, add credentials for your [IBM-Cloud](https://cloud.ibm.com/ "IBM-Cloud") Account (don't change the others environment vars):
 
    ```js
-   	TTS_API_KEY= // REQUIRED
-   	TTS_URL= // REQUIRED
+   	TTS_API_KEY=		// REQUIRED
+   	TTS_URL=		// REQUIRED
    ```
 
 2. Run `$ docker-compose up --build -d` to build docker-compose
@@ -79,17 +79,17 @@ Basically, a REST API that consists of converting text to speech using the **IBM
 
 ```js
 	// Server
-	NODE_PORT=3333  // OPTIONAL
+	NODE_PORT=3333		// OPTIONAL
 
 	// MySQL
-	MYSQL_HOST=smarkio-case-mysql // without docker= REQUIRED
-	MYSQL_USER= // OPTIONAL
-	MYSQL_PASS= // OPTIONAL
-	MYSQL_DB= // without docker= REQUIRED
+	MYSQL_HOST=		// without docker= REQUIRED
+	MYSQL_USER=		// OPTIONAL
+	MYSQL_PASS=		// OPTIONAL
+	MYSQL_DB=		// without docker= REQUIRED
 
 	// IBM Cloud
-	TTS_API_KEY= // REQUIRED
-	TTS_URL= // REQUIRED
+	TTS_API_KEY=		// REQUIRED
+	TTS_URL=		// REQUIRED
 ```
 
 3. In your MYSQL, create a DB (with the same name as in your `.env` file):
