@@ -56,30 +56,35 @@ Basically, a REST API that consists of converting text to speech using the **IBM
 ```
 
 2. Move yourself to the appropriate directory: `$ cd smarkio-case-server`
-3. Change `.env.example` credentials
-4. Rename `.env.example` to `.env`
+3. Rename `.env.example` to `.env`
 
 #### Now, we have 2 paths: **With** Docker and **Without** Docker:
 
 - ### **With** Docker:
 
-Attention: If you are going on this way, **don't** change `MYSQL_HOST` in `.env.example`
+1. In your `.env` file, add credentials for your IBM-CLOUD Account:
 
-1. Run `$ docker-compose up --build -d` to build docker-compose
-2. Run `$ npm run populate` to run migrations/seeds
+   ```js
+   TTS_API_KEY=
+   TTS_URL=
+   ```
+
+2. Run `$ docker-compose up --build -d` to build docker-compose
+3. Run `$ npm run populate` to run migrations
 
 - ### **Without** Docker:
 
 1. To insalling dependencies, run: `$ npm install`
-2. In your MYSQL, create a DB (with the same name as in your `.env`):
+2. In your `.env` file, change **all** with your credentials
+3. In your MYSQL, create a DB (with the same name as in your `.env`):
 
 ```SQL
 CREATE DATABASE someDatabase;
 ```
 
-3. Run `$ npm run build` to compile ts to js
+3. Run `$ npm run build` to compile ts build bundle
 4. Run `$ npm run knex:migrate` to run migrations
-5. Run `$ npm run knex:seed` to run seeds
+5. Run `$ npm run start` to start server
 
 ### If you've done Everything so far, you can now Start the [Client-Side](https://github.com/matheus2x/smarkio-case-client).
 
@@ -97,51 +102,39 @@ Attention: Omit the braces <code>{}</code> from examples. They indicate variable
 
 Method: `POST` <br>
 Route: `http://localhost:{NODE_PORT}/tts` <br>
-Request Body: `Message you want to convert to speech` and the `voiceLang` <br>
-Output w/ Datatype:
+Request Body:
+
+```javascript
+	{
+		"comment": String,
+		"voiceLang": String // "1" to pt-br and "2" to en-us
+	}
+```
+
+Response:
 
 ```javascript
   {
     "id": Number,
     "comment": String,
-    "speech": String
+    "audio": String // path to use
   }
 ```
-
-<details>
-  <summary>Example:</summary>
-
-Method: `POST` <br>
-Route: `http://localhost:3333/tts` <br>
-Request Body: `Die Monster! You Don't Belong on this World!` <br>
-Output:
-
-<h1 align="left">
-    <img alt="post" title="post" src=".github/post-response-example.png"><br>
-</h1>
-</details> <br>
 
 #### 2. Listen to the comment speech:
 
 Method: `GET` <br>
 Route: `http://localhost:{NODE_PORT}/uploads/speech-{commentID}.mp3` <br>
 Output: `audio.mp3 bynary file` <br>
-
-<details>
-  <summary>Example:</summary>
-
-Method: `GET` <br>
-Route: `http://localhost:3333/uploads/speech-1.mp3` <br>
-Output: [speech-1.mp3](https://github.com/matheus2x/smarkio-case-server/blob/master/uploads/speech-1.mp3) <br>
+Example: [speech-1.mp3](https://github.com/matheus2x/smarkio-case-server/blob/master/uploads/speech-1.mp3) <br>
 Listen audio in Vocaroo: https://voca.ro/1kSLOdtoUecV
-
-</details> <br>
 
 #### 3. Index all comments in DB:
 
 Method: `GET` <br>
 Route: `http://localhost:{NODE_PORT}/tts` <br>
-Output w/ Datatype:
+
+Response:
 
 ```javascript
   [
@@ -158,26 +151,6 @@ Output w/ Datatype:
      ...
   ]
 ```
-
-<details>
-  <summary>Example:</summary>
-
-Method: `GET` <br>
-Route: `http://localhost:3333/tts` <br>
-Output:
-
-```javascript
-  [
-    {
-      "id": 1,
-      "comment": "Die Monster! You Don't Belong on this World!",
-      "speech": "http://localhost:3333/uploads/speech-5.mp3"
-    },
-     ...
-  ]
-```
-
-</details> <br>
 
 <a id="useful-urls"></a>
 
