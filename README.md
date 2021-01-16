@@ -62,11 +62,11 @@ Basically, a REST API that consists of converting text to speech using the **IBM
 
 - ### **With** Docker:
 
-1. In your `.env` file, add credentials for your IBM-CLOUD Account:
+1. In your `.env` file, add credentials for your [IBM-Cloud](https://cloud.ibm.com/ "IBM-Cloud") Account:
 
    ```js
-   TTS_API_KEY=
-   TTS_URL=
+   	TTS_API_KEY=
+   	TTS_URL=
    ```
 
 2. Run `$ docker-compose up --build -d` to build docker-compose
@@ -74,9 +74,25 @@ Basically, a REST API that consists of converting text to speech using the **IBM
 
 - ### **Without** Docker:
 
-1. To insalling dependencies, run: `$ npm install`
-2. In your `.env` file, change **all** with your credentials
-3. In your MYSQL, create a DB (with the same name as in your `.env`):
+1. To installing dependencies, run: `$ npm install`
+2. In your `.env` file, change values with your credentials:
+
+```js
+	// Server
+	NODE_PORT=3333  // OPTIONAL
+
+	// MySQL
+	MYSQL_HOST=smarkio-case-mysql // without docker= REQUIRED
+	MYSQL_USER= // OPTIONAL
+	MYSQL_PASS= // OPTIONAL
+	MYSQL_DB= // without docker= REQUIRED
+
+	// IBM Cloud
+	TTS_API_KEY= // REQUIRED
+	TTS_URL= // REQUIRED
+```
+
+3. In your MYSQL, create a DB (with the same name as in your `.env` file):
 
 ```SQL
 CREATE DATABASE someDatabase;
@@ -114,11 +130,11 @@ Request Body:
 Response:
 
 ```javascript
-  {
-    "id": Number,
-    "comment": String,
-    "audio": String // path to use
-  }
+	{
+		"id": Number,
+		"comment": String,
+		"audio": String // path to use
+	}
 ```
 
 #### 2. Listen to the comment speech:
@@ -137,18 +153,18 @@ Route: `http://localhost:{NODE_PORT}/tts` <br>
 Response:
 
 ```javascript
-  [
-    {
-      "id": Number,
-      "comment": String,
-      "audio": String
-    },
-    {
-      "id": Number,
-      "comment": String,
-      "audio": String
-     }
-     ...
+	[
+		{
+			"id": Number,
+			"comment": String,
+			"audio": String
+		},
+		{
+			"id": Number,
+			"comment": String,
+			"audio": String
+			},
+		...
   ]
 ```
 
@@ -162,7 +178,6 @@ Response:
 
 - [Git](https://git-scm.com/ "Git")
 - [Node](https://nodejs.org/ "Node")
-- [Yarn](https://yarnpkg.com/ "Yarn")
 - [MySQL](https://www.mysql.com/ "MySQL")
 - [Docker](https://www.docker.com/ "Docker")
 - [IBM-Watson-Cloud](https://cloud.ibm.com/ "IBM-Watson-Cloud")
